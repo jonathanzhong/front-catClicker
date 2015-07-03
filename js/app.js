@@ -44,7 +44,7 @@ $(function() {
 		getUrl: function() {
 			var formattedImg = [];
 			for (var i = 0; i < model.length; i ++) {
-				formattedImg[i] =  '<img src="'+ model[i].imgUrl +'" style="display:none">';
+				formattedImg[i] =  '<img src="'+ model[i].imgUrl +'">';
 				console.log(formattedImg);
 			}
 			return formattedImg;
@@ -53,7 +53,17 @@ $(function() {
 			for (var i = 0; i < modle.length; i++) {
 
 			}
+		},
+		bindButtonToCat: function() {
+			for (var i = 0; i < model.length; i++ ) {
+				function() {
+					
+				}
+			}
+
 		}
+
+
 	}
 
 
@@ -66,11 +76,22 @@ $(function() {
 			for (var i = 0; i < model.length; i++) {
 				catList.append(buttonContent[i]);
 			}
+		},
+		renderCatView: function() {
+			var catView = $('#catView');
+			var catViewContent = octopus.getUrl();
+			for (var i = 0; i < model.length; i++) {
+				catView.append('<div class="cat" id="cat'+ i +'">'+ catViewContent[i] +'</div>');
+			}
+			$('.cat').hide();
+			$('#cat0').show();
 		}
+
 
 	}
 	
 	view.renderCatList();
+	view.renderCatView();
 	
 
 })
