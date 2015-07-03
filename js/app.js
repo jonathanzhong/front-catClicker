@@ -31,12 +31,11 @@ $(function() {
 
 
 	var octopus = {
-
 		getName: function() {
 			//Trick: formattedName should not be declared inside the for loop.
 			var formattedName = [];
 			for (var i = 0; i < model.length; i++) {
-				formattedName[i] = '<button class="button'+ i +'">'+ model[i].name +'</button>';
+				formattedName[i] = '<button id="button'+ i +'">'+ model[i].name +'</button>';
 				console.log(formattedName);
 			}
 			return formattedName;
@@ -50,20 +49,38 @@ $(function() {
 			return formattedImg;
 		},
 		getCount: function() {
-			for (var i = 0; i < modle.length; i++) {
-
+			var formattedCount = [];
+			for (var i = 0; i < model.length; i++) {
+				formattedCount[i] = '<span class="counter">'+ model[i].clickCount +'</span><p>clicks</p><br>';
 			}
+			return formattedCount;
 		},
-		bindButtonToCat: function() {
+		listenButton: function() {
+			var bindButtonToCat = function(idNumber) {
+				$("#button"+idNumber).click(function() {
+					$('.cat').hide();
+					$("#cat"+idNumber).show();
+				})
+			};
 			for (var i = 0; i < model.length; i++ ) {
-				function() {
-					
-				}
+				bindButtonToCat(i);
 			}
 
+		},
+		listenImage: function() {
+			var bindImageToCount = function(idNumber) {
+				var cat = "#cat" + idNumber
+				$(cat).click(function() {
+					var count = $(cat+" >.counter").text();
+					count = parseInt(count) + 1;
+					$(cat+" >.counter").text(count);
+				})
+			};
+			for (var i = 0; i < model.length; i++) {
+				bindImageToCount(i);
+			}
 		}
-
-
+		
 	}
 
 
@@ -80,8 +97,9 @@ $(function() {
 		renderCatView: function() {
 			var catView = $('#catView');
 			var catViewContent = octopus.getUrl();
+			var catViewCount = octopus.getCount();
 			for (var i = 0; i < model.length; i++) {
-				catView.append('<div class="cat" id="cat'+ i +'">'+ catViewContent[i] +'</div>');
+				catView.append('<div class="cat" id="cat'+ i +'">'+ catViewCount[i] + catViewContent[i] +'</div>');
 			}
 			$('.cat').hide();
 			$('#cat0').show();
@@ -90,8 +108,10 @@ $(function() {
 
 	}
 	
+	
 	view.renderCatList();
 	view.renderCatView();
-	
+	octopus.listenButton();
+	octopus.listenImage();
 
-})
+});

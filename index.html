@@ -5,13 +5,15 @@
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 
 	<style type="text/css">
+	p {
+		text-align: center;
+		margin-top: 10px;
+		font-size: 14pt;
+	}
 	#catList {
 		text-align: center;
 		display: block;
-		width:100%;
-		margin-top: 20px;
 	}
-
 	button {
 		margin-right: 5px;
 		margin-left: 5px;
@@ -22,8 +24,9 @@
 		margin-right: auto;
 		margin-left: auto;
 		margin-top: 10px;
+		width: 100%;
 	}
-	#click-count {
+	.counter {
 		display: block;
 		margin-top: 10px;
 		text-align: center;
@@ -38,6 +41,8 @@
 </head>
 
 <body>
+
+<div class="welcomeMessage"><p>Click the buttons to show the cats.</p></div>
 
 <div id = "catList" class="row">
 	
